@@ -12,7 +12,7 @@ for tb in Document(O/'T28附_状态日活动实际进度方案.docx').tables:
  for row in tb.rows:
   c=[v.text for v in row.cells]
   if len(c)==11 and c[0] in {a['id'] for a in base}:actual[c[0]]=c
-hol={date(2027,1,1),date(2027,4,5)}|{date(2027,2,d) for d in range(5,14)}|{date(2027,5,d) for d in range(1,6)}
+hol={date(2027,1,1),date(2027,4,5),date(2027,6,9)}|{date(2027,2,d) for d in range(5,14)}|{date(2027,5,d) for d in range(1,6)}
 days=[];d=date(2026,12,1)
 while len(days)<230:
  if d.weekday()<5 and d not in hol:days.append(d)
@@ -54,21 +54,6 @@ def schedule(items):
   succ=[b for b in q if a['id'] in b['pred'] and not b['done']];a['LF']=min([b['LS'] for b in succ],default=finish);a['LS']=round(a['LF']-a['dur'],2);a['TF']=round(a['LS']-a['ES'],2);a['FF']=round(min([b['ES'] for b in succ],default=finish)-a['EF'],2)
  return seq,finish
 S,finish=schedule(A)
-# Alternatives are engineering proposals, not authorizations.
-scenarios=[('不压缩',S,finish,0,'完整范围，保留资源顺序')]
-for typ in ['赶工','快速跟进','裁剪建议项']:
- z=copy.deepcopy(A);cost=0
- for a in z:
-  if a['done']:continue
-  if typ=='赶工' and a['role'] in ['B2','FE','B1'] and a['dur']>=2:
-   cut=round(a['dur']*.25,2);a['dur']=round(a['dur']-cut,2);cost+=cut*1500*1.5
-  if typ=='快速跟进' and a['id'].endswith('-F'):
-   # Model early skeleton work as a separate zero-resource lead; retain interface acceptance dependency.
-   cut=round(a['dur']*.25,2);a['dur']-=cut;cost+=cut*1500*.2
-  if typ=='裁剪建议项' and a['wbs'] in ['4.5.1','4.5.2']:
-   cost-=a['cost'];a['dur']=0
- seq,f=schedule(z);scenarios.append((typ,seq,f,round(cost,2),{'赶工':'假设可分割任务补充0.5名同岗短期资源，效率75%；需职能经理落实，实际可用性待确认','快速跟进':'界面25%骨架在等待期预制；预计20%返工，界面最终验收依赖不变；须确认等待期容量','裁剪建议项':'仅模拟取消4.5.1和4.5.2建议项，保留零时长传递关系；须C确认及甲方批准'}[typ]))
-# Document helpers
 
 def new(title,code,ver='V2.0'):
  d=Document();s=d.sections[0];s.top_margin=s.bottom_margin=Cm(1.6);s.left_margin=s.right_margin=Cm(1.6)
@@ -93,65 +78,146 @@ def table(d,heads,rows):
  return t
 
 def rev(d,msg):h(d,'修订记录');table(d,['版本','日期','修订人','主要变更'],[['V2.0','2026-11-22','邓皓天',msg]])
-intro='依据项目假设表v2.2、已冻结T13 V2.0、已批准CR-01及T28附v1.0编制。状态日2027-02-19，下一个工作日为2月22日。仅完成大作业二阶段2中成员D的T33、T34和T35。'
-d=new('活动三点估算与剩余工期','T15');p(d,intro)
-p(d,'已完成28项活动固定实绩，2项在制活动仅估剩余，51项原未完成活动及8项变更活动纳入重排。原三点值不再将最可能人天直接当作工期；按F9用期望值保留两位参与计算。单岗满负荷，项目经理活动沿用原日历占用比例；期望工期与成本期望人天分别管理。')
-p(d,'两项在制剩余三点为D工程判断，待C和岗位负责人复核：4.1.3-S取0.5/1/2日，考虑模板澄清；4.1.5-S取1/2.2/4日，考虑OCR返工。68%和45%只表示挣值完成度，不直接换算剩余工期。CR01三点沿用批准附件。甲方确认活动按约定1日固定。')
-p(d,'资源修正：CR01-02放在4.1.3-S后、4.1.2-S前；CR01-03在原4.4.4-S后；前端与测试增量插入各自原链，新增验收脚本在7.1.1-A后。已完成4.1.4-F不再等待尚未完成4.1.3-F，固定实绩；后续4.1.2-F另补该资源关系。')
-for chunk in [S[i:i+18] for i in range(0,len(S),18)]:
- if chunk!=S[:18]:d.add_page_break()
- table(d,['活动与岗位','三点日','期望日或实绩','状态与依据','紧前'],[[a['id']+' '+a['role'],a['tri'],a['dur'],a['pct']+' '+a['basis'],'、'.join(a['pred']) or '无'] for a in chunk])
-rev(d,'固定历史实绩，新增剩余估算及8项CR01活动，保留编码并重排资源。');d.save(O/'T15_活动清单工期估算与前后关系.docx')
-# AOA: each activity has unique start/end event; dependencies are zero-time dummy arrows.
-rem=[a for a in S if not a['done']];event={a['id']:(2*i+2,2*i+3) for i,a in enumerate(rem)}
-d=new('剩余工作双代号网络与关键路径','T16');p(d,intro);p(d,'采用AOA双代号：圆圈为事件，实箭线为活动，虚箭线工期0表示紧前关系；事件1为状态日后起点。图按行分解，同编号事件为同一节点，跨行虚箭线用事件号引用，完整连接见紧前事件表。原已完成活动不参与剩余网络计算，历史日期见T15。时间以项目开工第0日计，状态日后起点为52。')
-p(d,f'不压缩项目结束为{ds(finish,True)}，网络终点{finish:.2f}工作日。总浮动TF=LS−ES，自由浮动FF=紧后最早开始最小值−EF；末活动以项目终点计算。关键活动见下表TF为0的行。关键链含资源顺序，不能理解为纯技术依赖。')
-font=ImageFont.truetype('C:/Windows/Fonts/simsun.ttc',18)
-for k in range(0,len(rem),9):
- if k:d.add_page_break()
- chunk=rem[k:k+9];im=Image.new('RGB',(1250,90*len(chunk)+30),'white');dr=ImageDraw.Draw(im)
- for j,a in enumerate(chunk):
-  y=j*90+55;i,e=event[a['id']];pr=[event[v][1] for v in a['pred'] if v in event] or [1]
-  dr.text((5,y-28),'虚箭线来自 '+','.join(map(str,pr)),font=font,fill='black');[dr.line((xx,y,xx+6,y),fill='black',width=1) for xx in range(285,415,12)];dr.polygon([(420,y),(410,y-5),(410,y+5)],fill='black')
-  for xx,nn in [(445,i),(1140,e)]:dr.ellipse((xx-23,y-23,xx+23,y+23),outline='black',width=2);dr.text((xx-14,y-11),str(nn),font=font,fill='black')
-  dr.line((468,y,1117,y),fill='black',width=3 if a['TF']==0 else 1);dr.polygon([(1117,y),(1105,y-5),(1105,y+5)],fill='black');dr.text((490,y-27),f"{a['id']}  {a['dur']:.2f}日  TF {a['TF']:.2f}",font=font,fill='black')
- path=T/f'aoa{k}.png';im.save(path);d.add_picture(str(path),width=Cm(17.5))
- table(d,['活动 i→j','ES / EF','LS / LF','TF / FF'],[[f"{a['id']} {event[a['id']][0]}→{event[a['id']][1]}",f"{a['ES']:.2f} / {a['EF']:.2f}",f"{a['LS']:.2f} / {a['LF']:.2f}",f"{a['TF']:.2f} / {a['FF']:.2f}"] for a in chunk])
-h(d,'关键活动序列');p(d,' → '.join(a['id'] for a in rem if a['TF']==0));p(d,'图中起点1到每个无剩余紧前的活动起事件设0工期虚活动。终止活动完成事件连接统一终点，终点工期为0。上述规则唯一确定全部虚箭线；关键活动同时存在技术与资源约束。');rev(d,'按状态日重算ES EF LS LF TF FF，建立剩余AOA事件。');d.save(O/'T16_AOA网络图关键路径与浮动时间.docx')
-# D dictionary only, preserve original entries and replace schedule fields.
-d=new('成员D工作包字典更新','T14 D附件');p(d,intro);p(d,'本附件替换全组字典中成员D原有4.1.4和4.3.2两条；其他成员条目及B负责的新增条目由各自汇总，不能将本附件当作全组完整字典。')
-for tb in Document(R/'docs/T14_WBS字典.docx').tables:
- rows=[[c.text for c in r.cells] for r in tb.rows]
- if not any(len(r)>1 and (r[1].startswith('4.1.4 OCR') or r[1].startswith('4.3.2 差异')) for r in rows):continue
- w='4.1.4' if '4.1.4' in rows[1][1] else '4.3.2';aa=[a for a in S if a['wbs']==w]
- for r in rows:
-  if r[0]=='工期':r[1]='；'.join(f"{a['id']}：{a['dur']:.2f}日，{ds(a['ES'])}至{ds(a['EF'],True)}，TF={a['TF']:.2f}" for a in aa)+'。已完成按实际，其余按PERT；人天不等同跨度。'
-  if r[0]=='备注':r[1]+=(' 状态日全部完成；OCR返工属于4.1.5，CR01无直接增量，保留历史成本。' if w=='4.1.4' else ' 状态日未开始；CR01无直接增量，受后端关键链和前端排队影响。以下日期为不压缩预测，批准T35后同步更新。')
- d.add_page_break() if w=='4.3.2' else None
- h(d,w+' 工作包');table(d,rows[0],rows[1:])
-rev(d,'更新D两条字典工期、状态日进度和变更影响。');d.save(O/'T14_WBS字典_成员D.docx')
-# Compare and draw all scenario schedules; recommended conditional, no false approval.
-d=new('进度压缩方案与更新基准甘特图','T35','V0.1');p(d,intro);p(d,'结论：以下方案均为计算与审批稿。原T19继续有效；项目经理选定方案并由发起人批准后，方可发布V2.0更新基准。赶工资源、快速跟进拆分和范围裁剪均需相应责任人落实。')
-table(d,['方案','项目结束','较不压缩节省日','增减人工元','风险与前提'],[[n,ds(f,True),f'{finish-f:.2f}',f'{c:,.2f}',risk] for n,s,f,c,risk in scenarios])
-p(d,'赶工费用按缩短日×1.5人天×1500元试算；单活动缩短25%，约需0.5名同岗人员，含交接损耗，未计延期云费用及储备。快速跟进把界面25%骨架从联调移到等待期，表列20%返工增量；须按细分任务落实空闲容量，不能直接削减必须测试。裁剪仅按4.5两包全部删除测算，节约成本沿用原PERT成本。三种费用均供T37整合，不能直接冲减已用应急储备；原EAC 479,981.25元仍为绩效外推。')
-best=min(scenarios[1:],key=lambda v:v[2]);p(d,f'建议优先评审{best[0]}情景，其预测结束{ds(best[2],True)}。无方案自动获得批准；若仍晚于5月31日，应协商延期或重新组合可核实措施。不能以透支周末或未经批准删减必须项保日期。')
-for n,seq,f,c,risk in scenarios:
- h(d,n+' 里程碑预测');lk={a['id']:a for a in seq};ids=[('MS3','4.4.4-F'),('MS4','6.2.2-A'),('MS5','5.4.2-A'),('MS6','7.3.2-A'),('收尾','1.4.1-A')]
- table(d,['里程碑','预测日期','说明'],[[ms,ds(max(lk[v]['EF'] for v in ['4.4.4-F','CR01-04','CR01-05']) if ms=='MS3' else lk[aid]['EF'],True),'MS3须同时完成CR01-04/05' if ms=='MS3' else '按对应活动完成'] for ms,aid in ids])
- # MS3 gate corrected to include change implementation.
- for start in range(0,len(seq),18):
-  d.add_page_break();h(d,n+' 甘特图 '+str(start//18+1));ch=seq[start:start+18];im=Image.new('RGB',(1500,75+len(ch)*32),'white');dr=ImageDraw.Draw(im)
-  for tick in range(0,math.ceil(f)+1,10):
-   xx=260+tick*7;dr.line((xx,40,xx,im.height),fill='#dddddd');dr.text((xx,5),str(tick),font=font,fill='black')
-  for j,a in enumerate(ch):
-   y=55+j*32;dr.text((0,y-8),a['id'],font=font,fill='black');dr.rectangle((260+a['ES']*7,y,260+max(a['EF'],a['ES']+.2)*7,y+12),outline='black',fill='black' if a['done'] or a['TF']==0 else 'white')
-  pp=T/f'gantt{n}{start}.png';im.save(pp);d.add_picture(str(pp),width=Cm(17.5));p(d,'横轴为从2026-12-01起累计工作日，52为状态日后起点。非工作日不占刻度；黑条为已完成或关键活动，空心条为其他活动。准确日历起止及所有活动详见配套HTML。')
-h(d,'审批与交接');table(d,['事项','责任人','当前状态'],[['选择压缩情景及确认资源','项目经理','待选择'],['裁剪范围或两级变更业务核验','C与甲方','CR01已批；裁剪未批'],['更新进度基准','项目发起人','待批准'],['回写T20 T07 T24及T37预算','A与D及B','待方案批准后同步']]);rev(d,'V0.1比较三种压缩方式并给出可审阅情景甘特图；尚未替换原基准。');d.tables[-1].cell(1,0).text='V0.1';d.save(O/'T35_进度压缩与更新基准甘特图.docx')
+
+# Approved combination 1; no scope reduction.
+from collections import defaultdict
+from decimal import Decimal,ROUND_HALF_UP
 import html
-page='<meta charset="utf-8"><title>阶段2进度计算明细</title><style>body{font:14px Microsoft YaHei;color:black}table{border-collapse:collapse}td,th{border:1px solid #999;padding:5px}th{background:white}</style><h1>阶段2进度计算明细</h1><p>审批稿，原基准仍有效。日历按项目假设表；状态日52之后排程。历史实际不重写。</p>'
-for n,seq,f,c,risk in scenarios:
- page+=f'<h2>{n}</h2><p>{risk}</p><table><tr>'+''.join('<th>'+v+'</th>' for v in ['活动','名称','岗位','日','ES','EF','LS','LF','TF','FF','开始','完成','紧前'])+'</tr>'
- for a in seq:page+='<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in [a['id'],a['name'],a['role'],a['dur'],*[round(a[k],2) for k in ['ES','EF','LS','LF','TF','FF']],ds(a['ES']),ds(a['EF'],True),'、'.join(a['pred'])])+'</tr>'
- page+='</table>'
-(O/'D阶段2_进度计算明细.html').write_text(page,encoding='utf-8');(O/'D阶段2交接数据.json').write_text(json.dumps({'date':'2026-11-22','status':'方案审批稿','scenarios':[dict(name=n,finish=f,date=ds(f,True),cost_delta=c,activities=s) for n,s,f,c,risk in scenarios]},ensure_ascii=False,indent=2),encoding='utf-8')
-print([(n,ds(f,True),c) for n,s,f,c,r in scenarios]);print('done',sum(a['done'] for a in S),'remaining',len(rem))
+SOURCE_URL='https://www.forestry.gov.cn/lyj/1/szxx/20261105/695102.html'
+def cash(v):return float(Decimal(str(v)).quantize(Decimal('.01'),rounding=ROUND_HALF_UP))
+def money(v):return f'{v:,.2f}'
+crash=[]
+for a in A:
+ if not a['done'] and a['role'] in ['B1','B2','FE'] and a['dur']>=2:
+  cut=round(a['dur']*.25,2);crash.append(dict(id=a['id'],wbs=a['wbs'],role=a['role'],original=a['dur'],cut=cut,after=round(a['dur']-cut,2),added_effort=round(cut*1.5,3),cost=cash(cut*2250)));a['dur']=round(a['dur']-cut,2)
+lk={a['id']:a for a in A};lk['5.3.1-A']['pred']=['5.1.1-A'];lk['5.3.1-A']['role']='QA2';lk['5.3.1-A']['dur']=6.20
+lk['5.3.2-A']['pred']=list(dict.fromkeys(lk['5.3.2-A']['pred']+['5.2.2-A','CR01-06']))
+S,finish=schedule(A);L={a['id']:a for a in S};rem=[a for a in S if not a['done']]
+assert ds(L['7.3.2-A']['EF'],True)=='2027-06-08' and ds(finish,True)=='2027-06-11'
+assert math.ceil(finish)-119==8
+for i,a in enumerate(rem):
+ for b in rem[i+1:]:assert a['role']!=b['role'] or min(a['EF'],b['EF'])-max(a['ES'],b['ES'])<.001
+critical=[a['id'] for a in rem if a['TF']==0]
+ms={'MS3':ds(max(L[k]['EF'] for k in ['4.4.4-F','CR01-04','CR01-05']),True),'MS4':ds(L['6.2.2-A']['EF'],True),'MS5':ds(L['5.4.2-A']['EF'],True),'MS6':ds(L['7.3.2-A']['EF'],True),'项目结束':ds(finish,True)}
+intro='状态日2027-02-19；以已批准组合1 赶工与测试快速跟进为唯一更新进度基准。范围不变，保留4.5，不开CR-02。项目经理于2026-11-22选定，项目发起人（模拟）批准进度基准变更，延期8个工作日。'
+cal='日历沿用项目假设表B3/B4，每周五天，调休周末不工作；增补2027-06-09端午节，放假1天。依据国办发明电〔2026〕10号（2026-11-05），国家林草局转引中国政府网：'+SOURCE_URL+'。累计工作日映射取整，不对每个活动单独取整；原项目窗口119工作日，新结束映射第127工作日。'
+resource='必须落实的资源：借调1名测试人员QA2，承担5.3.1-A回归，原QA执行功能、安全与部署验证，最多两条测试链并行。回归原5.17人天已在原人工预算内，20%返工追加1.034人天即1551.00元，工期6.20日；基础工作转岗不重复计费。后端（二）、技术负责人、前端须按逐活动追加人天落实赶工补人；赶工成本系数为每缩短1活动日追加1.5人天，不代表每岗只需补0.5人。'
+font=ImageFont.truetype('C:/Windows/Fonts/simsun.ttc',18)
+def revision(d,ver,msg,prior=None):
+ h(d,'修订记录');rows=prior or []
+ table(d,['版本','日期','修订人','主要变更'],rows+[[ver,'2026-11-22','邓皓天',msg]])
+def pagedtable(d,heads,rows,n=20):
+ for k in range(0,len(rows),n):
+  if k:d.add_page_break()
+  table(d,heads,rows[k:k+n])
+def chart(d):
+ for k in range(0,len(S),24):
+  d.add_page_break();h(d,'组合1更新基准甘特图 '+str(k//24+1));ch=S[k:k+24];im=Image.new('RGB',(1600,95+32*len(ch)),'white');dr=ImageDraw.Draw(im)
+  for tick in range(0,math.ceil(finish)+1,10):
+   xx=300+tick*9;dr.line((xx,55,xx,im.height),fill='#ddd');dr.text((xx,5),str(tick),font=font,fill='black');dr.text((xx,26),ds(tick)[5:],font=font,fill='black')
+  for j,a in enumerate(ch):
+   y=70+j*32;dr.text((0,y-8),a['id']+' '+a['role'],font=font,fill='black');dr.rectangle((300+a['ES']*9,y,300+max(a['EF'],a['ES']+.2)*9,y+13),outline='black',fill='black' if a['done'] or a['TF']==0 else 'white')
+  pp=T/f'gantt{k}.png';im.save(pp);d.add_picture(str(pp),width=Cm(17.5));p(d,'横轴为累计工作日，上行工作日序号、下行对应日期；非工作日不占刻度。黑条表示已完成或关键活动。精确日历起止见HTML明细。')
+# T15
+D=new('活动估算与批准进度基准','T15','V2.0');p(D,intro);p(D,cal);p(D,resource)
+p(D,'原O M P仍表示工作量估算，期望工期为(O+4M+P)/6，保留两位。两项在制的剩余工程估算分别0.5/1/2和1/2.2/4日。压缩前期望日与批准工期分列，不能以压缩后工期反算原预算人工。已完成28项固定实绩；61项剩余活动重新排程。历史活动的LS/LF/TF/FF不再评估。')
+pagedtable(D,['活动 岗位','O M P','原期望日','批准日','批准开始 完成','紧前'],[[a['id']+' '+a['role'],a['tri'],next((c['original'] for c in crash if c['id']==a['id']),5.17 if a['id']=='5.3.1-A' else a['dur']),a['dur'],ds(a['ES'])+'\n'+ds(a['EF'],True),'、'.join(a['pred']) or '无'] for a in S],14)
+revision(D,'V2.0','按批准组合1重排，补端午，分列PERT与批准工期；替换同版本未批准计算稿。');D.save(O/'T15_活动清单工期估算与前后关系.docx')
+# T16 AOA decomposed complete event network
+D=new('网络图第2版与关键路径分析','T16','V2.0');p(D,intro);p(D,cal);p(D,'剩余网络起点为52，终点为'+str(finish)+'。ES EF LS LF以开工第0工作日起算；TF=LS−ES，FF=min紧后ES−EF；多条紧后取最小值。网络包含技术和同岗资源顺序。已完成活动只固定实际日期，不纳入剩余反推。QA2承担回归，与原QA功能测试并行，安全测试汇合两链后才可开始。')
+p(D,'关键路径 '+ ' → '.join(critical));p(D,'AOA采用双代号：圆圈为事件，实箭线为有工期活动，虚箭线为零工期紧前连接；按活动行分解绘制，相同事件号是同一节点。为避免跨页线交叉，虚线源事件号列于行首，所有虚箭线在事件连接表明列。起点1连接无剩余紧前的活动，所有终止活动连接统一终点999。')
+event={a['id']:(2*i+2,2*i+3) for i,a in enumerate(rem)}
+for k in range(0,len(rem),11):
+ D.add_page_break();ch=rem[k:k+11];im=Image.new('RGB',(1250,60+80*len(ch)),'white');dr=ImageDraw.Draw(im)
+ for j,a in enumerate(ch):
+  y=50+j*80;ii,jj=event[a['id']];pred=[event[q][1] for q in a['pred'] if q in event] or [1]
+  dr.text((0,y-18),'虚线源 '+','.join(map(str,pred)),font=font,fill='black')
+  for xx in range(250,380,12):dr.line((xx,y,xx+6,y),fill='black')
+  dr.polygon([(390,y),(380,y-5),(380,y+5)],fill='black')
+  for xx,ev in [(420,ii),(1160,jj)]:dr.ellipse((xx-24,y-24,xx+24,y+24),outline='black',width=2);dr.text((xx-16,y-10),str(ev),font=font,fill='black')
+  dr.line((444,y,1136,y),fill='black',width=3 if a['TF']==0 else 1);dr.polygon([(1136,y),(1125,y-5),(1125,y+5)],fill='black');dr.text((470,y-24),a['id']+'  '+str(a['dur'])+'日',font=font,fill='black')
+ path=T/f'aoa{k}.png';im.save(path);D.add_picture(str(path),width=Cm(17.5));table(D,['活动 i→j','ES EF','LS LF','TF FF'],[[a['id']+' '+str(event[a['id']]),f"{a['ES']:.2f} / {a['EF']:.2f}",f"{a['LS']:.2f} / {a['LF']:.2f}",f"{a['TF']:.2f} / {a['FF']:.2f}"] for a in ch])
+D.add_page_break();h(D,'完整虚活动事件连接表');rows=[]
+for a in rem:
+ for q in ([event[v][1] for v in a['pred'] if v in event] or [1]):rows.append([f'{q}→{event[a["id"]][0]}','0',a['id']+'紧前汇合'])
+for a in rem:
+ if not any(a['id'] in b['pred'] for b in rem):rows.append([f'{event[a["id"]][1]}→999','0','统一终点'])
+pagedtable(D,['虚箭线事件','工期','含义'],rows,30);revision(D,'V2.0','按组合1重算关键路径与总浮动 自由浮动，补齐AOA虚活动连接。');D.save(O/'T16_AOA网络图关键路径与浮动时间.docx')
+# T35 only selected baseline
+D=new('进度压缩方案与更新基准甘特图','T35','V1.0');p(D,intro);p(D,cal);table(D,['里程碑','批准日期'],list(ms.items()));p(D,resource)
+h(D,'审批与落实');table(D,['事项','记录'],[['项目经理决策','项目经理 2026-11-22 选定组合1，范围不变，不开CR-02'],['进度基准批准','项目发起人（模拟）批准进度基准变更，延期8个工作日'],['测试资源','借调QA2，入场时间不晚于'+ds(L['5.3.1-A']['ES'])+'，人员姓名及独立测试环境由项目经理落实'],['赶工资源','后端（二） 技术负责人 前端按活动清单补人，逐项确认入场时间及投入'],['成本授权','本文件记录进度批准；追加预算见T37，仍须B核对及发起人另行批准']])
+D.add_page_break();h(D,'人工追加费用');p(D,'35项赶工累计缩短22.57活动·天，追加33.855人天，费用50782.50元；测试返工1.034人天1551.00元，合计34.889人天52333.50元。净项目缩短量与活动缩短量不同，不能按净节省天数收费。')
+pagedtable(D,['活动 岗位','原日','批准日','缩短日','追加人天','追加人工元'],[[c['id']+' '+c['role'],c['original'],c['after'],c['cut'],c['added_effort'],money(c['cost'])] for c in crash],18)
+chart(D);revision(D,'V1.0','落实组合1与模拟发起人进度批准，补端午，仅保留选定基准；范围不裁剪。',[['V0.1','2026-11-22','邓皓天','首次比较四情景'],['V0.2','2026-11-22','邓皓天','增加组合方案和成本明细']]);D.save(O/'T35_进度压缩与更新基准甘特图.docx')
+# T37 cost bridge, WBS, monthly allocation from updated activity windows.
+base_mr=420782.81;cr_labor=20375.0;cr_reserve=1018.75;extra=52333.50;newbase=cash(base_mr+cr_labor+cr_reserve+extra);management=cash(newbase*.10);budget=cash(newbase+management);gap=cash(newbase-459112.50);request=cash(budget-459112.50)
+# package original cost table is authoritative; costs remain PERT.
+pkg={}
+for t in Document(R/'docs/T21_成本估计.docx').tables:
+ for row in t.rows:
+  c=[v.text for v in row.cells]
+  if len(c)==6 and c[0].count('.')==2:
+   pkg[c[0]]=dict(name=c[1],labor=float(c[3].replace(',','')),other=float(c[4].replace(',','')),cr=0,cr_reserve=0,extra=0)
+assert len(pkg)==59
+for a in S:
+ if a['id'].startswith('CR01'):
+  cost=(a['O']+4*a['M']+a['P'])/6*1500;pkg[a['wbs']]['cr']+=cost;pkg[a['wbs']]['cr_reserve']+=cost*.05
+for c in crash:pkg[c['wbs']]['extra']+=c['cost']
+pkg['5.3.1']['extra']+=1551
+bridge=[['MR-01后成本基准',money(base_mr),'417375 + 3407.81'],['CR01新增人工',money(cr_labor),'163/12人天 × 1500'],['CR01增量应急储备',money(cr_reserve),'20375 × 5%'],['赶工与测试追加',money(extra),'50782.50 + 1551.00'],['新成本基准及含风险额度EAC',money(newbase),'按项目经理指定加法口径，待B核对'],['建议管理储备',money(management),'新成本基准 × 10%'],['建议总预算',money(budget),'新基准 + 建议管理储备'],['最低资金缺口',money(gap),'新基准 − 原总预算'],['建议追加预算',money(request),'建议总预算 − 原总预算']]
+D=new('成本估计第2版','T21','V2.0');p(D,intro);p(D,'T37成本核对稿。以MR01批准后的420782.81元为起点，加入CR01增量21393.75元和选定方案追加人工52333.50元；新成本基准及含风险额度EAC为'+money(newbase)+'元。此处EAC是组合1资源按期落实、剩余工作按更新预算完成的管理预测，包含CR01应急额度；不表示预算追加已经获批。')
+table(D,['项目','金额元','依据'],bridge)
+p(D,'与T29区分：原BAC417375元、原CPI20/23对应历史EAC479981.25元，仍保留作偏差预警，不直接加到本次新基准中。MR01将3407.81元转入基准、减少管理储备，总预算不变；不得再重复追加该笔已批准损失。按新MR基准作纯绩效外推为483900.23元，尚未含CR01和组合1，不等同本稿的选定方案EAC。')
+p(D,'工程成本边界：原人工367500元加CR01人工20375元、赶工与返工52333.50元为440208.50元；原直接费用30000元暂不变。原应急19875元已耗尽，MR01转入3407.81元属于损失弥补，CR01仅另留1018.75元。对已确定的赶工费用不机械再加5%应急，以免偏离项目经理指定桥接口径。管理储备按统一10%另列，待批准补足。')
+D.add_page_break();h(D,'按WBS自下而上核对');rows=[]
+for w,v in pkg.items():
+ orig=(v['labor']+v['other'])*1.05;mr=3407.81 if w=='1.3.1' else 0
+ rows.append([w,v['name'],money(orig),money(v['cr']+v['cr_reserve']),money(v['extra']),money(orig+mr+v['cr']+v['cr_reserve']+v['extra'])])
+p(D,'原基准按原包成本计5%应急；MR01 3407.81元暂在1.3.1监控控制账单列，不作为该包新增人工，B核账时再追溯到R01/R06实际费用，不改变总额。展示分币尾差由汇总行统一控制。')
+pagedtable(D,['WBS','工作包','原基准','CR01含储备','赶工测试','新控制额'],rows,20);table(D,['汇总','原基准','MR01转入','CR01','赶工测试','新基准'],[['合计','417375.00','3407.81','21393.75','52333.50',money(newbase)]])
+p(D,'待B核对：EAC采用管理纠偏预测的合理性、实际费用入账与MR01损失归属、历史CPI外推对照、月度分摊。6月延长云环境及监控、管理支持是否产生新增费用尚未给出合同依据；本稿未擅自增加，用量或合同不足时须补估并报批，不能认定延长免费。');revision(D,'V2.0','按MR01及组合1建立成本桥接与WBS预算，交B复核。');D.save(O/'T21_成本估计.docx')
+# month: unchanged historical PV through status, move only unearned planned balance.
+hist=defaultdict(int)
+for v in x['daily_pv']:
+ if v['date']<='2027-02-19':hist[v['date'][:7]]+=v['pv_cents']
+weights=defaultdict(float)
+for a in rem:
+ cost=a.get('cost',0)
+ if a['id'].startswith('CR01'):continue
+ for ix in range(math.floor(a['ES']),math.ceil(a['EF'])):
+  overlap=max(0,min(ix+1,a['EF'])-max(ix,a['ES']));weights[str(days[ix])[:7]]+=cost*overlap/a['dur']
+def alloc(amount,weights):
+ keys=sorted(weights);vals={k:cash(amount*weights[k]/sum(weights.values())) for k in keys};vals[keys[-1]]=cash(vals[keys[-1]]+amount-sum(vals.values()));return vals
+remaining=alloc(417375-sum(hist.values())/100,weights);monthly=defaultdict(lambda:defaultdict(float))
+for m,v in hist.items():monthly[m]['orig']+=v/100
+for m,v in remaining.items():monthly[m]['orig']+=v
+monthly['2027-02']['mr']=3407.81
+for a in rem:
+ parts=[]
+ if a['id'].startswith('CR01'):parts.append(('cr',(a['O']+4*a['M']+a['P'])/6*1500*1.05))
+ if a['id']=='5.3.1-A':parts.append(('extra',1551))
+ for c in crash:
+  if c['id']==a['id']:parts.append(('extra',c['cost']))
+ for key,amount in parts:
+  w=defaultdict(float)
+  for ix in range(math.floor(a['ES']),math.ceil(a['EF'])):w[str(days[ix])[:7]]+=max(0,min(ix+1,a['EF'])-max(ix,a['ES']))
+  for m,v in alloc(amount,w).items():monthly[m][key]+=v
+# aggregate CR exact per activity rounding may leave a cent; absorb it in last CR month.
+last=max(m for m in monthly if monthly[m]['cr']);monthly[last]['cr']=cash(monthly[last]['cr']+21393.75-sum(v['cr'] for v in monthly.values()))
+monthrows=[];cum=0
+for m,v in sorted(monthly.items()):
+ total=cash(sum(v.values()));cum=cash(cum+total);monthrows.append([m,*[cash(v[k]) for k in ['orig','mr','cr','extra']],total,cum])
+assert abs(cum-newbase)<.011,(cum,newbase)
+D=new('成本预算第2版','T22','V2.0');p(D,intro);p(D,'进度基准已批准；下列成本基准及总预算属于T37送B核对及发起人报批稿。既有MR01批准不包含本次新增费用。');table(D,['项目','金额元','依据'],bridge)
+D.add_page_break();h(D,'月度成本基准建议');p(D,'保留状态日前逐日PV累计194023.44元的历史分摊；原BAC剩余223351.56元按新日历中原剩余活动成本权重重新分摊，包含原其他费用、储备及支持余额，是资金时段分摊约定，不代表这些金额全部是直接人工。MR01转入列2月；CR01和追加人工按对应新活动工作日分摊，末月吸收分币尾差。实际AC178501.56元与PV分别报告，不改写历史实际。')
+table(D,['月份','原BAC重排','MR01','CR01含应急','赶工测试','月基准','累计'],[[r[0],*[money(v) for v in r[1:]]] for r in monthrows])
+h(D,'追加预算与储备处理');p(D,'MR01后剩余管理储备38329.69元；CR01含应急与组合1合计73727.25元，超过剩余管理储备35397.56元。最低需新增该金额才能覆盖新基准，但管理储备将无余额。按统一10%管理储备规则，建议总预算543961.07元，追加84848.57元；其中最低缺口35397.56元，另恢复建议管理储备49451.01元。资金转用及追加须发起人批准，项目经理不能自行动用管理储备。')
+p(D,'新EAC494510.06元，状态日AC178501.56元，ETC316008.50元。该EAC含CR01应急1018.75元；不含新管理储备49451.01元，也不重复叠加T29历史EAC。B核对后由A回写假设表、T24及资金审批，T29原基准绩效另留历史对照。');revision(D,'V2.0','分摊组合1月度建议基准，区分最低缺口与按10%储备的追加总额。');D.save(O/'T22_成本预算.docx')
+# Shared data, selected scenario only; old alternatives remain in Git history.
+metrics={'MR01_BAC':base_mr,'CR01_labor':cr_labor,'CR01_contingency':cr_reserve,'crash_and_test':extra,'new_BAC':newbase,'EAC_including_CR01_contingency':newbase,'AC':178501.56,'ETC':cash(newbase-178501.56),'management_reserve_proposed':management,'total_budget_proposed':budget,'minimum_funding_gap':gap,'additional_budget_proposed':request,'status':'B复核及预算追加待批'}
+payload=dict(version='V1.0',date='2026-11-22',status='组合1进度基准已批准 成本建议待核',calendar={'holidays':sorted(map(str,hol)),'source':SOURCE_URL,'finish_delay_workdays':8},selected_scenario='组合1 赶工与测试快速跟进',milestones=ms,scenarios=[dict(name='组合1 赶工与测试快速跟进',finish=finish,date=ds(finish,True),cost_delta=extra,activities=S)],critical_path=critical,crash_cost_details=crash,cost_metrics=metrics,monthly_cost_baseline_proposed=monthrows)
+(O/'D阶段2交接数据.json').write_bytes((json.dumps(payload,ensure_ascii=False,indent=2)+'\n').encode('utf-8'))
+def ht(heads,rows):return '<table><tr>'+''.join('<th>'+html.escape(str(v))+'</th>' for v in heads)+'</tr>'+''.join('<tr>'+''.join('<td>'+html.escape(str(v))+'</td>' for v in row)+'</tr>' for row in rows)+'</table>'
+page='<meta charset="utf-8"><title>组合1批准基准明细</title><style>body{font:14px Microsoft YaHei;color:black}table{border-collapse:collapse}td,th{border:1px solid #888;padding:5px}th{background:white}</style><h1>组合1批准进度基准 V1.0</h1><p>'+intro+'</p><p>'+cal+'</p><p>'+resource+'</p>'+ht(['里程碑','日期'],ms.items())+'<h2>活动及网络</h2>'+ht(['活动','名称','岗位','批准日','ES','EF','LS','LF','TF','FF','开始','完成','紧前'],[[a['id'],a['name'],a['role'],a['dur'],*[a[k] if not a['done'] or k in ['ES','EF'] else '历史固定 不评估' for k in ['ES','EF','LS','LF','TF','FF']],ds(a['ES']),ds(a['EF'],True),'、'.join(a['pred'])] for a in S])+'<h2>逐活动赶工费用</h2>'+ht(['活动','岗位','原日','批准日','缩短日','追加人天','人工元'],[[c[k] for k in ['id','role','original','after','cut','added_effort','cost']] for c in crash])+'<h2>T37成本桥接</h2>'+ht(['项目','金额','依据'],bridge)+'<h2>月度建议基准</h2>'+ht(['月份','原BAC重排','MR01','CR01','追加人工','月基准','累计'],monthrows)
+(O/'D阶段2_进度计算明细.html').write_bytes((page+'\n').encode('utf-8'))
+print(ms);print(metrics);print('critical',' → '.join(critical));print('QA and resource overlap checks passed')
