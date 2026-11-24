@@ -1,0 +1,1333 @@
+{
+  "version": "V0.1",
+  "date": "2026-11-24",
+  "status": "D建议分解 待测试岗位与项目经理确认 非实绩",
+  "source_commit": "6739668",
+  "metrics": {
+    "original_ES": "8957/100",
+    "original_EF": "9577/100",
+    "latest_finish": "9791/100",
+    "batch3_gate": "4787/50",
+    "batch3_window_hours": "434/25",
+    "original_early_window_hours": "6/25",
+    "forecast_finish": "2406/25",
+    "forecast_finish_date": "2027-04-26",
+    "float_consumed_days": "47/100",
+    "remaining_float_days": "167/100",
+    "remaining_float_hours": "334/25",
+    "QA2_total_hours": "49.60",
+    "QA2_total_persondays": "6.20"
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "FR_count": 28,
+      "proposed_case_count": 56,
+      "baseline_hours": "25",
+      "rework_hours": "5",
+      "total_hours": "30",
+      "ES": "8957/100",
+      "EF": "2333/25"
+    },
+    {
+      "batch": 2,
+      "FR_count": 19,
+      "proposed_case_count": 38,
+      "baseline_hours": "13",
+      "rework_hours": "2.6",
+      "total_hours": "15.6",
+      "ES": "4687/50",
+      "EF": "9569/100"
+    },
+    {
+      "batch": 3,
+      "FR_count": 7,
+      "coverage_case_count": 21,
+      "reused_evidence_count": 15,
+      "new_or_retest_count": 6,
+      "baseline_hours": "10/3",
+      "rework_hours": "2/3",
+      "total_hours": "4",
+      "ES": "4787/50",
+      "EF": "2406/25"
+    }
+  ],
+  "case_catalog": [
+    {
+      "case_id": "B1-FR-1-01-P",
+      "batch": 1,
+      "fr": "FR-1-01",
+      "requirement": "用户登录",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-01-N",
+      "batch": 1,
+      "fr": "FR-1-01",
+      "requirement": "用户登录",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-03-P",
+      "batch": 1,
+      "fr": "FR-1-03",
+      "requirement": "部门数据隔离",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-03-N",
+      "batch": 1,
+      "fr": "FR-1-03",
+      "requirement": "部门数据隔离",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-04-P",
+      "batch": 1,
+      "fr": "FR-1-04",
+      "requirement": "操作日志（审计）",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-04-N",
+      "batch": 1,
+      "fr": "FR-1-04",
+      "requirement": "操作日志（审计）",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-05-P",
+      "batch": 1,
+      "fr": "FR-1-05",
+      "requirement": "会话与密码策略",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-1-05-N",
+      "batch": 1,
+      "fr": "FR-1-05",
+      "requirement": "会话与密码策略",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-01-P",
+      "batch": 1,
+      "fr": "FR-2-01",
+      "requirement": "电子发票 PDF 上传",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-01-N",
+      "batch": 1,
+      "fr": "FR-2-01",
+      "requirement": "电子发票 PDF 上传",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-02-P",
+      "batch": 1,
+      "fr": "FR-2-02",
+      "requirement": "图片票据上传",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-02-N",
+      "batch": 1,
+      "fr": "FR-2-02",
+      "requirement": "图片票据上传",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-03-P",
+      "batch": 1,
+      "fr": "FR-2-03",
+      "requirement": "批量上传",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-03-N",
+      "batch": 1,
+      "fr": "FR-2-03",
+      "requirement": "批量上传",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-04-P",
+      "batch": 1,
+      "fr": "FR-2-04",
+      "requirement": "归档与状态管理",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-04-N",
+      "batch": 1,
+      "fr": "FR-2-04",
+      "requirement": "归档与状态管理",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-05-P",
+      "batch": 1,
+      "fr": "FR-2-05",
+      "requirement": "票据查询与筛选",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-05-N",
+      "batch": 1,
+      "fr": "FR-2-05",
+      "requirement": "票据查询与筛选",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-06-P",
+      "batch": 1,
+      "fr": "FR-2-06",
+      "requirement": "预览与原件查看",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-06-N",
+      "batch": 1,
+      "fr": "FR-2-06",
+      "requirement": "预览与原件查看",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-07-P",
+      "batch": 1,
+      "fr": "FR-2-07",
+      "requirement": "作废与恢复",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-2-07-N",
+      "batch": 1,
+      "fr": "FR-2-07",
+      "requirement": "作废与恢复",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-01-P",
+      "batch": 1,
+      "fr": "FR-3-01",
+      "requirement": "OCR 文字识别",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-01-N",
+      "batch": 1,
+      "fr": "FR-3-01",
+      "requirement": "OCR 文字识别",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-02-P",
+      "batch": 1,
+      "fr": "FR-3-02",
+      "requirement": "关键字段抽取",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-02-N",
+      "batch": 1,
+      "fr": "FR-3-02",
+      "requirement": "关键字段抽取",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-03-P",
+      "batch": 1,
+      "fr": "FR-3-03",
+      "requirement": "字段置信度输出",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-03-N",
+      "batch": 1,
+      "fr": "FR-3-03",
+      "requirement": "字段置信度输出",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-04-P",
+      "batch": 1,
+      "fr": "FR-3-04",
+      "requirement": "人工修正字段",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-04-N",
+      "batch": 1,
+      "fr": "FR-3-04",
+      "requirement": "人工修正字段",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-05-P",
+      "batch": 1,
+      "fr": "FR-3-05",
+      "requirement": "待核对清单",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-05-N",
+      "batch": 1,
+      "fr": "FR-3-05",
+      "requirement": "待核对清单",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-06-P",
+      "batch": 1,
+      "fr": "FR-3-06",
+      "requirement": "字段格式与合理性校验",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-06-N",
+      "batch": 1,
+      "fr": "FR-3-06",
+      "requirement": "字段格式与合理性校验",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-07-P",
+      "batch": 1,
+      "fr": "FR-3-07",
+      "requirement": "提取结果版本记录",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-3-07-N",
+      "batch": 1,
+      "fr": "FR-3-07",
+      "requirement": "提取结果版本记录",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-01-P",
+      "batch": 1,
+      "fr": "FR-4-01",
+      "requirement": "规则分类",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-01-N",
+      "batch": 1,
+      "fr": "FR-4-01",
+      "requirement": "规则分类",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-02-P",
+      "batch": 1,
+      "fr": "FR-4-02",
+      "requirement": "大模型辅助分类",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-02-N",
+      "batch": 1,
+      "fr": "FR-4-02",
+      "requirement": "大模型辅助分类",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-03-P",
+      "batch": 1,
+      "fr": "FR-4-03",
+      "requirement": "类别字典维护",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-03-N",
+      "batch": 1,
+      "fr": "FR-4-03",
+      "requirement": "类别字典维护",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-04-P",
+      "batch": 1,
+      "fr": "FR-4-04",
+      "requirement": "人工调整类别",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-04-N",
+      "batch": 1,
+      "fr": "FR-4-04",
+      "requirement": "人工调整类别",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-05-P",
+      "batch": 1,
+      "fr": "FR-4-05",
+      "requirement": "分类结果与依据展示",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-4-05-N",
+      "batch": 1,
+      "fr": "FR-4-05",
+      "requirement": "分类结果与依据展示",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-01-P",
+      "batch": 1,
+      "fr": "FR-9-01",
+      "requirement": "报销单 Excel 导入",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-01-N",
+      "batch": 1,
+      "fr": "FR-9-01",
+      "requirement": "报销单 Excel 导入",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-02-P",
+      "batch": 1,
+      "fr": "FR-9-02",
+      "requirement": "费用台账 Excel 导入",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-02-N",
+      "batch": 1,
+      "fr": "FR-9-02",
+      "requirement": "费用台账 Excel 导入",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-03-P",
+      "batch": 1,
+      "fr": "FR-9-03",
+      "requirement": "模板下载与表头校验",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-03-N",
+      "batch": 1,
+      "fr": "FR-9-03",
+      "requirement": "模板下载与表头校验",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-04-P",
+      "batch": 1,
+      "fr": "FR-9-04",
+      "requirement": "导入错误报告",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-04-N",
+      "batch": 1,
+      "fr": "FR-9-04",
+      "requirement": "导入错误报告",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-05-P",
+      "batch": 1,
+      "fr": "FR-9-05",
+      "requirement": "演示数据初始化",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B1-FR-9-05-N",
+      "batch": 1,
+      "fr": "FR-9-05",
+      "requirement": "演示数据初始化",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-01-P",
+      "batch": 2,
+      "fr": "FR-5-01",
+      "requirement": "三方数据匹配",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-01-N",
+      "batch": 2,
+      "fr": "FR-5-01",
+      "requirement": "三方数据匹配",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-02-P",
+      "batch": 2,
+      "fr": "FR-5-02",
+      "requirement": "金额比较与差异计算",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-02-N",
+      "batch": 2,
+      "fr": "FR-5-02",
+      "requirement": "金额比较与差异计算",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-03-P",
+      "batch": 2,
+      "fr": "FR-5-03",
+      "requirement": "字段一致性比对",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-03-N",
+      "batch": 2,
+      "fr": "FR-5-03",
+      "requirement": "字段一致性比对",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-04-P",
+      "batch": 2,
+      "fr": "FR-5-04",
+      "requirement": "匹配结果分级",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-04-N",
+      "batch": 2,
+      "fr": "FR-5-04",
+      "requirement": "匹配结果分级",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-05-P",
+      "batch": 2,
+      "fr": "FR-5-05",
+      "requirement": "手工匹配与解除",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-05-N",
+      "batch": 2,
+      "fr": "FR-5-05",
+      "requirement": "手工匹配与解除",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-06-P",
+      "batch": 2,
+      "fr": "FR-5-06",
+      "requirement": "对账批次与结果快照",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-06-N",
+      "batch": 2,
+      "fr": "FR-5-06",
+      "requirement": "对账批次与结果快照",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-07-P",
+      "batch": 2,
+      "fr": "FR-5-07",
+      "requirement": "对账规则配置",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-5-07-N",
+      "batch": 2,
+      "fr": "FR-5-07",
+      "requirement": "对账规则配置",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-01-P",
+      "batch": 2,
+      "fr": "FR-6-01",
+      "requirement": "金额不一致检测",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-01-N",
+      "batch": 2,
+      "fr": "FR-6-01",
+      "requirement": "金额不一致检测",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-02-P",
+      "batch": 2,
+      "fr": "FR-6-02",
+      "requirement": "完全重复检测",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-02-N",
+      "batch": 2,
+      "fr": "FR-6-02",
+      "requirement": "完全重复检测",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-03-P",
+      "batch": 2,
+      "fr": "FR-6-03",
+      "requirement": "疑似重复检测",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-03-N",
+      "batch": 2,
+      "fr": "FR-6-03",
+      "requirement": "疑似重复检测",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-04-P",
+      "batch": 2,
+      "fr": "FR-6-04",
+      "requirement": "必填字段缺失",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-04-N",
+      "batch": 2,
+      "fr": "FR-6-04",
+      "requirement": "必填字段缺失",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-05-P",
+      "batch": 2,
+      "fr": "FR-6-05",
+      "requirement": "超费用标准检测",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-05-N",
+      "batch": 2,
+      "fr": "FR-6-05",
+      "requirement": "超费用标准检测",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-06-P",
+      "batch": 2,
+      "fr": "FR-6-06",
+      "requirement": "异常证据链",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-06-N",
+      "batch": 2,
+      "fr": "FR-6-06",
+      "requirement": "异常证据链",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-07-P",
+      "batch": 2,
+      "fr": "FR-6-07",
+      "requirement": "异常等级与 AI 说明",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-6-07-N",
+      "batch": 2,
+      "fr": "FR-6-07",
+      "requirement": "异常等级与 AI 说明",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-01-P",
+      "batch": 2,
+      "fr": "FR-8-01",
+      "requirement": "月度费用统计",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-01-N",
+      "batch": 2,
+      "fr": "FR-8-01",
+      "requirement": "月度费用统计",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-02-P",
+      "batch": 2,
+      "fr": "FR-8-02",
+      "requirement": "部门与类别统计",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-02-N",
+      "batch": 2,
+      "fr": "FR-8-02",
+      "requirement": "部门与类别统计",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-03-P",
+      "batch": 2,
+      "fr": "FR-8-03",
+      "requirement": "图表展示",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-03-N",
+      "batch": 2,
+      "fr": "FR-8-03",
+      "requirement": "图表展示",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-04-P",
+      "batch": 2,
+      "fr": "FR-8-04",
+      "requirement": "Excel 导出",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-04-N",
+      "batch": 2,
+      "fr": "FR-8-04",
+      "requirement": "Excel 导出",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-05-P",
+      "batch": 2,
+      "fr": "FR-8-05",
+      "requirement": "AI 月度说明",
+      "scenario": "主流程与验收正例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B2-FR-8-05-N",
+      "batch": 2,
+      "fr": "FR-8-05",
+      "requirement": "AI 月度说明",
+      "scenario": "失败 分支或边界反例",
+      "status": "拟定最小场景 待测试岗补步骤和预期",
+      "reuse": false
+    },
+    {
+      "case_id": "B3-FR-1-02-1",
+      "batch": 3,
+      "fr": "FR-1-02",
+      "requirement": "角色与权限分配",
+      "scenario": "独立授予初审与主管权限后完成授权链路",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E01"
+    },
+    {
+      "case_id": "B3-FR-1-02-2",
+      "batch": 3,
+      "fr": "FR-1-02",
+      "requirement": "角色与权限分配",
+      "scenario": "同账号自审自复核及跨部门请求被拒并留日志",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N01"
+    },
+    {
+      "case_id": "B3-FR-1-02-3",
+      "batch": 3,
+      "fr": "FR-1-02",
+      "requirement": "角色与权限分配",
+      "scenario": "变更权限后下次请求生效，无需重新登录",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N02"
+    },
+    {
+      "case_id": "B3-FR-7-01-1",
+      "batch": 3,
+      "fr": "FR-7-01",
+      "requirement": "审核工作台",
+      "scenario": "初审队列按权限显示且计数与明细一致",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E02"
+    },
+    {
+      "case_id": "B3-FR-7-01-2",
+      "batch": 3,
+      "fr": "FR-7-01",
+      "requirement": "审核工作台",
+      "scenario": "初审提交后转入主管待复核队列",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E03"
+    },
+    {
+      "case_id": "B3-FR-7-01-3",
+      "batch": 3,
+      "fr": "FR-7-01",
+      "requirement": "审核工作台",
+      "scenario": "筛选与待补充 已完成队列的状态及处理人核对",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E04"
+    },
+    {
+      "case_id": "B3-FR-7-02-1",
+      "batch": 3,
+      "fr": "FR-7-02",
+      "requirement": "审核动作",
+      "scenario": "初审建议不结案 主管最终结论才结案",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E05"
+    },
+    {
+      "case_id": "B3-FR-7-02-2",
+      "batch": 3,
+      "fr": "FR-7-02",
+      "requirement": "审核动作",
+      "scenario": "退回缺补充项或提交缺理由被拦截",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E06"
+    },
+    {
+      "case_id": "B3-FR-7-02-3",
+      "batch": 3,
+      "fr": "FR-7-02",
+      "requirement": "审核动作",
+      "scenario": "主管改判初审意见时强制填写改判原因",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N03"
+    },
+    {
+      "case_id": "B3-FR-7-03-1",
+      "batch": 3,
+      "fr": "FR-7-03",
+      "requirement": "审核中的修改",
+      "scenario": "初审修正字段与类别记录前后值及理由",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E07"
+    },
+    {
+      "case_id": "B3-FR-7-03-2",
+      "batch": 3,
+      "fr": "FR-7-03",
+      "requirement": "审核中的修改",
+      "scenario": "复核基于当前轮次初审证据快照",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E08"
+    },
+    {
+      "case_id": "B3-FR-7-03-3",
+      "batch": 3,
+      "fr": "FR-7-03",
+      "requirement": "审核中的修改",
+      "scenario": "退回补充重提后新证据生效且不覆盖旧意见",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N04"
+    },
+    {
+      "case_id": "B3-FR-7-04-1",
+      "batch": 3,
+      "fr": "FR-7-04",
+      "requirement": "状态流转",
+      "scenario": "初审到复核再到完成的合法状态链",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E09"
+    },
+    {
+      "case_id": "B3-FR-7-04-2",
+      "batch": 3,
+      "fr": "FR-7-04",
+      "requirement": "状态流转",
+      "scenario": "退回重提创建新轮次并回待初审",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E10"
+    },
+    {
+      "case_id": "B3-FR-7-04-3",
+      "batch": 3,
+      "fr": "FR-7-04",
+      "requirement": "状态流转",
+      "scenario": "重复提交仅生效一次 跳级 旧轮次及重复结案被拒",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E11"
+    },
+    {
+      "case_id": "B3-FR-7-05-1",
+      "batch": 3,
+      "fr": "FR-7-05",
+      "requirement": "审计日志查询",
+      "scenario": "两级意见 原状态 新状态 操作者 时间及原因完整可追溯",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E12"
+    },
+    {
+      "case_id": "B3-FR-7-05-2",
+      "batch": 3,
+      "fr": "FR-7-05",
+      "requirement": "审计日志查询",
+      "scenario": "退回 重提 改判及不同轮次的日志查询顺序正确",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E13"
+    },
+    {
+      "case_id": "B3-FR-7-05-3",
+      "batch": 3,
+      "fr": "FR-7-05",
+      "requirement": "审计日志查询",
+      "scenario": "授权查询和导出内容一致 无权账号不得越权取得日志",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N05"
+    },
+    {
+      "case_id": "B3-FR-7-06-1",
+      "batch": 3,
+      "fr": "FR-7-06",
+      "requirement": "审核统计",
+      "scenario": "初审及复核数量 异常确认率与明细一致",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E14"
+    },
+    {
+      "case_id": "B3-FR-7-06-2",
+      "batch": 3,
+      "fr": "FR-7-06",
+      "requirement": "审核统计",
+      "scenario": "处理时长和异常类型分布可追溯至有效数据",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E15"
+    },
+    {
+      "case_id": "B3-FR-7-06-3",
+      "batch": 3,
+      "fr": "FR-7-06",
+      "requirement": "审核统计",
+      "scenario": "待复核 退回和同一异常历史轮次不重复计入完成数",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N06"
+    }
+  ],
+  "reuse_required": [
+    {
+      "case_id": "B3-FR-1-02-1",
+      "batch": 3,
+      "fr": "FR-1-02",
+      "requirement": "角色与权限分配",
+      "scenario": "独立授予初审与主管权限后完成授权链路",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E01"
+    },
+    {
+      "case_id": "B3-FR-7-01-1",
+      "batch": 3,
+      "fr": "FR-7-01",
+      "requirement": "审核工作台",
+      "scenario": "初审队列按权限显示且计数与明细一致",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E02"
+    },
+    {
+      "case_id": "B3-FR-7-01-2",
+      "batch": 3,
+      "fr": "FR-7-01",
+      "requirement": "审核工作台",
+      "scenario": "初审提交后转入主管待复核队列",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E03"
+    },
+    {
+      "case_id": "B3-FR-7-01-3",
+      "batch": 3,
+      "fr": "FR-7-01",
+      "requirement": "审核工作台",
+      "scenario": "筛选与待补充 已完成队列的状态及处理人核对",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E04"
+    },
+    {
+      "case_id": "B3-FR-7-02-1",
+      "batch": 3,
+      "fr": "FR-7-02",
+      "requirement": "审核动作",
+      "scenario": "初审建议不结案 主管最终结论才结案",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E05"
+    },
+    {
+      "case_id": "B3-FR-7-02-2",
+      "batch": 3,
+      "fr": "FR-7-02",
+      "requirement": "审核动作",
+      "scenario": "退回缺补充项或提交缺理由被拦截",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E06"
+    },
+    {
+      "case_id": "B3-FR-7-03-1",
+      "batch": 3,
+      "fr": "FR-7-03",
+      "requirement": "审核中的修改",
+      "scenario": "初审修正字段与类别记录前后值及理由",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E07"
+    },
+    {
+      "case_id": "B3-FR-7-03-2",
+      "batch": 3,
+      "fr": "FR-7-03",
+      "requirement": "审核中的修改",
+      "scenario": "复核基于当前轮次初审证据快照",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E08"
+    },
+    {
+      "case_id": "B3-FR-7-04-1",
+      "batch": 3,
+      "fr": "FR-7-04",
+      "requirement": "状态流转",
+      "scenario": "初审到复核再到完成的合法状态链",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E09"
+    },
+    {
+      "case_id": "B3-FR-7-04-2",
+      "batch": 3,
+      "fr": "FR-7-04",
+      "requirement": "状态流转",
+      "scenario": "退回重提创建新轮次并回待初审",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E10"
+    },
+    {
+      "case_id": "B3-FR-7-04-3",
+      "batch": 3,
+      "fr": "FR-7-04",
+      "requirement": "状态流转",
+      "scenario": "重复提交仅生效一次 跳级 旧轮次及重复结案被拒",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E11"
+    },
+    {
+      "case_id": "B3-FR-7-05-1",
+      "batch": 3,
+      "fr": "FR-7-05",
+      "requirement": "审计日志查询",
+      "scenario": "两级意见 原状态 新状态 操作者 时间及原因完整可追溯",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E12"
+    },
+    {
+      "case_id": "B3-FR-7-05-2",
+      "batch": 3,
+      "fr": "FR-7-05",
+      "requirement": "审计日志查询",
+      "scenario": "退回 重提 改判及不同轮次的日志查询顺序正确",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E13"
+    },
+    {
+      "case_id": "B3-FR-7-06-1",
+      "batch": 3,
+      "fr": "FR-7-06",
+      "requirement": "审核统计",
+      "scenario": "初审及复核数量 异常确认率与明细一致",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E14"
+    },
+    {
+      "case_id": "B3-FR-7-06-2",
+      "batch": 3,
+      "fr": "FR-7-06",
+      "requirement": "审核统计",
+      "scenario": "处理时长和异常类型分布可追溯至有效数据",
+      "reuse": true,
+      "status": "拟定 待测试岗确认",
+      "required_evidence_id": "CR01-06-E15"
+    }
+  ],
+  "retest_required": [
+    {
+      "case_id": "B3-FR-1-02-2",
+      "batch": 3,
+      "fr": "FR-1-02",
+      "requirement": "角色与权限分配",
+      "scenario": "同账号自审自复核及跨部门请求被拒并留日志",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N01"
+    },
+    {
+      "case_id": "B3-FR-1-02-3",
+      "batch": 3,
+      "fr": "FR-1-02",
+      "requirement": "角色与权限分配",
+      "scenario": "变更权限后下次请求生效，无需重新登录",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N02"
+    },
+    {
+      "case_id": "B3-FR-7-02-3",
+      "batch": 3,
+      "fr": "FR-7-02",
+      "requirement": "审核动作",
+      "scenario": "主管改判初审意见时强制填写改判原因",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N03"
+    },
+    {
+      "case_id": "B3-FR-7-03-3",
+      "batch": 3,
+      "fr": "FR-7-03",
+      "requirement": "审核中的修改",
+      "scenario": "退回补充重提后新证据生效且不覆盖旧意见",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N04"
+    },
+    {
+      "case_id": "B3-FR-7-05-3",
+      "batch": 3,
+      "fr": "FR-7-05",
+      "requirement": "审计日志查询",
+      "scenario": "授权查询和导出内容一致 无权账号不得越权取得日志",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N05"
+    },
+    {
+      "case_id": "B3-FR-7-06-3",
+      "batch": 3,
+      "fr": "FR-7-06",
+      "requirement": "审核统计",
+      "scenario": "待复核 退回和同一异常历史轮次不重复计入完成数",
+      "reuse": false,
+      "status": "拟定 待测试岗确认",
+      "retest_id": "B3-N06"
+    }
+  ],
+  "approval_pending": [
+    "逐项测试用例和预计工时",
+    "CR01-06证据覆盖及16小时可行性",
+    "QA2借调时段与浮动使用"
+  ],
+  "approved_cost_unchanged": true
+}
